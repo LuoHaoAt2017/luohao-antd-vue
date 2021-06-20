@@ -1,12 +1,22 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+/* eslint-disable */
+import HelloWorld from './components/HelloWorld.vue';
 
-Vue.config.productionTip = false;
+const items = [
+  HelloWorld
+];
 
-export default new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app');
+const install = function(Vue: any) {
+  items.forEach(elem => {
+    Vue.component(elem.name, elem);
+  });
+}
+
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+}
+
+export default {
+  install,
+  HelloWorld
+}
