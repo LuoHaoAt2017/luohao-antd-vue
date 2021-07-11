@@ -1,5 +1,5 @@
 /* eslint-disable */
-import DateRangePicker from './date-range-picker.vue';
+import DateRangePicker from './date-range/index.vue';
 
 const items = [
   DateRangePicker

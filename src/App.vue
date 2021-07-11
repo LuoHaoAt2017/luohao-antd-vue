@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import DateRangePicker from "./components/date-range-picker.vue";
+import DateRangePicker from "./components/date-range/index.vue";
 import { Select, Dropdown, Menu } from "ant-design-vue";
 import moment from "moment";
 import month from "./mixins/month";

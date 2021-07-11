@@ -12,19 +12,22 @@
       <template slot="content">
         <div class="calendar-wrapper" :style="style">
           <a-calendar
-            :fullscreen="false"
-            :disabledDate="disabledPrevDate"
             v-model="minValue"
             class="calendar"
             mode="year"
-            @panelChange="onPrevChange"
-          />
-          <a-calendar
             :fullscreen="false"
-            :disabledDate="disabledNextDate"
+            :disabledDate="disabledPrevDate"
+            :headerRender="(param) => headerRender(param, 'prev')"
+            @panelChange="onPrevChange"
+          >
+          </a-calendar>
+          <a-calendar
             v-model="maxValue"
             class="calendar"
             mode="year"
+            :fullscreen="false"
+            :disabledDate="disabledNextDate"
+            :headerRender="(param) => headerRender(param, 'next')"
             @panelChange="onNextChange"
           />
         </div>
@@ -64,6 +67,7 @@
 import { Calendar, Icon, Popover, Button, Divider } from "ant-design-vue";
 import "moment/locale/zh-cn";
 import moment from "moment";
+import CustomHeader from "./header.vue";
 export default {
   name: "DateRangePicker",
   components: {
@@ -123,12 +127,18 @@ export default {
   },
   methods: {
     onEnter() {
-      this.showClear = !isNaN(this.minValue);
+      if (this.minValue) {
+        this.showClear = true;
+      }
     },
     onLeave() {
       this.showClear = false;
     },
-    onClear() {},
+    onClear() {
+      this.minValue = moment();
+      this.maxValue = moment();
+      this.$emit("change", []);
+    },
     onPrevChange() {},
     onNextChange() {},
     onCancle() {
@@ -143,8 +153,8 @@ export default {
       if (!visible) {
         this.$emit("change", [this.minValue, this.maxValue]);
       } else {
-        this.minValue = this.value[0] || null;
-        this.maxValue = this.value[1] || null;
+        this.minValue = this.value[0] || moment();
+        this.maxValue = this.value[1] || moment();
       }
     },
     disabledPrevDate(date) {
@@ -160,7 +170,21 @@ export default {
       return false;
     },
     destoryPopover() {
-      this.$refs.popover.$destroy();
+    },
+    headerRender({ value, type, onChange, onTypeChange }, option) {
+      return this.$createElement(
+        CustomHeader,
+        {
+          props: {
+            value: value,
+            type: type,
+            onChange: onChange,
+            onTypeChange: onTypeChange,
+            option: option
+          },
+        },
+        ["hello", "world"]
+      );
     },
   },
   created() {
@@ -243,6 +267,9 @@ export default {
           display: flex;
           .calendar {
             min-width: 280px;
+            .ant-fullcalendar-header {
+              text-align: center;
+            }
             .ant-fullcalendar-month-panel-cell-disabled {
               .ant-fullcalendar-month {
                 .ant-fullcalendar-value {
