@@ -1,51 +1,51 @@
 <template>
   <div class="date-range-picker">
     <slot name="prefix"></slot>
-    <slot name="default">
-      <a-popover
-        ref="popover"
-        v-model="visible"
-        trigger="click"
-        placement="bottomLeft"
-        @visibleChange="visibleChange"
-        overlayClassName="calendar-range-popover-container"
-      >
-        <template slot="content">
-          <div class="calendar-wrapper" :style="style">
-            <a-calendar
-              :fullscreen="false"
-              :disabledDate="disabledPrevDate"
-              v-model="minValue"
-              class="calendar"
-              mode="year"
-              @panelChange="onPrevChange"
-            />
-            <a-calendar
-              :fullscreen="false"
-              :disabledDate="disabledNextDate"
-              v-model="maxValue"
-              class="calendar"
-              mode="year"
-              @panelChange="onNextChange"
-            />
-          </div>
-          <a-divider type="horizontal" style="margin: 6px 0" />
-          <div class="custom-footer">
-            <a-button type="default" size="small" @click="onCancle"
-              >取消</a-button
-            >
-            <a-button type="primary" size="small" @click="onConfirm"
-              >确定</a-button
-            >
-          </div>
-        </template>
+    <a-popover
+      ref="popover"
+      v-model="visible"
+      trigger="click"
+      placement="bottomLeft"
+      @visibleChange="visibleChange"
+      overlayClassName="calendar-range-popover-container"
+    >
+      <template slot="content">
+        <div class="calendar-wrapper" :style="style">
+          <a-calendar
+            :fullscreen="false"
+            :disabledDate="disabledPrevDate"
+            v-model="minValue"
+            class="calendar"
+            mode="year"
+            @panelChange="onPrevChange"
+          />
+          <a-calendar
+            :fullscreen="false"
+            :disabledDate="disabledNextDate"
+            v-model="maxValue"
+            class="calendar"
+            mode="year"
+            @panelChange="onNextChange"
+          />
+        </div>
+        <a-divider type="horizontal" style="margin: 6px 0" />
+        <div class="custom-footer">
+          <a-button type="default" size="small" @click="onCancle"
+            >取消</a-button
+          >
+          <a-button type="primary" size="small" @click="onConfirm"
+            >确定</a-button
+          >
+        </div>
+      </template>
+      <slot name="default">
         <div class="default">
           <span class="min-value">{{ minlabel }}</span>
           <span class="separator">~</span>
           <span class="max-value">{{ maxlabel }}</span>
         </div>
-      </a-popover>
-    </slot>
+      </slot>
+    </a-popover>
     <slot name="suffix">
       <div class="suffix">
         <a-icon type="calendar" v-if="!showClear" @mouseenter="onEnter" />
@@ -63,7 +63,7 @@
 <script>
 import { Calendar, Icon, Popover, Button, Divider } from "ant-design-vue";
 import "moment/locale/zh-cn";
-import moment from 'moment';
+import moment from "moment";
 export default {
   name: "DateRangePicker",
   components: {
@@ -74,8 +74,8 @@ export default {
     ADivider: Divider,
   },
   model: {
-    prop: 'value',
-    event: 'change'
+    prop: "value",
+    event: "change",
   },
   props: {
     width: {
@@ -84,8 +84,12 @@ export default {
     },
     value: {
       required: false,
-      default: () => []
-    }
+      default: () => [],
+    },
+    show: {
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {
@@ -99,20 +103,23 @@ export default {
   computed: {
     minlabel() {
       if (this.value[0]) {
-        return moment(this.value[0]).format('YYYY-MM');
+        return moment(this.value[0]).format("YYYY-MM");
       } else {
-        return '开始时间';
+        return "开始时间";
       }
     },
     maxlabel() {
       if (this.value[1]) {
-        return moment(this.value[1]).format('YYYY-MM');
+        return moment(this.value[1]).format("YYYY-MM");
       } else {
-        return '结束时间';
+        return "结束时间";
       }
     },
   },
   watch: {
+    show(value) {
+      this.visible = value;
+    },
   },
   methods: {
     onEnter() {
@@ -126,15 +133,15 @@ export default {
     onNextChange() {},
     onCancle() {
       this.visible = false;
-      this.$emit('close');
+      this.$emit("close");
     },
     onConfirm() {
       this.visible = false;
-      this.$emit('change', [this.minValue, this.maxValue]);
+      this.$emit("change", [this.minValue, this.maxValue]);
     },
     visibleChange(visible) {
       if (!visible) {
-        this.$emit('change', [this.minValue, this.maxValue]);
+        this.$emit("change", [this.minValue, this.maxValue]);
       } else {
         this.minValue = this.value[0] || null;
         this.maxValue = this.value[1] || null;
@@ -154,7 +161,7 @@ export default {
     },
     destoryPopover() {
       this.$refs.popover.$destroy();
-    }
+    },
   },
   created() {
     this.style.width = this.width + "px";
@@ -162,7 +169,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .date-range-picker {
   display: flex;
   align-items: center;
