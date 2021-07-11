@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <date-range-picker class="range-container">
+    <date-range-picker v-model="value" class="range-container">
       <div class="prefix" slot="prefix" placement="bottomLeft">
         <a-dropdown :trigger="['click']">
           <a-menu slot="overlay" class="dropdown-menu-wrapper">
@@ -35,18 +35,15 @@ export default {
     AMenu: Menu,
     AMenuItem: Menu.Item,
   },
+  data() {
+    return {
+      format: 'YYYY-MM',
+      value: []
+    }
+  },
   methods: {
-    onMinChange(date, dateString) {
-      const max =
-        (this.maxvalue && moment(this.maxvalue).format(this.format)) || null;
-      this.$emit("refresh", [dateString || null, max]);
-      this.selected = null;
-    },
-    onMaxChange(date, dateString) {
-      const min =
-        (this.minvalue && moment(this.minvalue).format(this.format)) || null;
-      this.$emit("refresh", [min, dateString || null]);
-      this.selected = null;
+    onChange(dates) {
+      console.log('start: ', moment(dates[0]).format(this.format), ' end: ',  moment(dates[1]).format(this.format));
     },
     onSelect(option) {
       const cases = [
