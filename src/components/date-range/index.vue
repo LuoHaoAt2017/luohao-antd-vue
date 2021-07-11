@@ -169,8 +169,7 @@ export default {
       }
       return false;
     },
-    destoryPopover() {
-    },
+    destoryPopover() {},
     headerRender({ value, type, onChange, onTypeChange }, option) {
       return this.$createElement(
         CustomHeader,
@@ -180,7 +179,7 @@ export default {
             type: type,
             onChange: onChange,
             onTypeChange: onTypeChange,
-            option: option
+            option: option,
           },
         },
         ["hello", "world"]
