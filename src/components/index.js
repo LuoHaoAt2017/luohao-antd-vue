@@ -1,11 +1,11 @@
 /* eslint-disable */
-import HelloWorld from './components/HelloWorld.vue';
+import DateRangePicker from './date-range-picker.vue';
 
 const items = [
-  HelloWorld
+  DateRangePicker
 ];
 
-const install = function(Vue: any) {
+const install = function(Vue) {
   items.forEach(elem => {
     Vue.component(elem.name, elem);
   });
@@ -18,5 +18,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  HelloWorld
+  DateRangePicker
 }
