@@ -1,16 +1,21 @@
-import Vue from 'vue';
-import App from './App.vue';
+import HelloWorld from './components/hello-world.vue';
 
-import { DatePicker, Calendar, Icon, Popover } from 'ant-design-vue';
+const items = [
+  HelloWorld
+];
 
-Vue.use(Calendar);
-Vue.use(DatePicker);
-Vue.use(Icon);
-Vue.use(Popover);
+const install = function(Vue) {
+  items.forEach(elem => {
+    Vue.component(elem.name, elem);
+  });
+}
 
-new Vue({
-  el: '#app',
-  render(h) {
-    return h(App);
-  }
-});
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+}
+
+export default {
+  install,
+  HelloWorld
+}
