@@ -1,6 +1,7 @@
 {
   "name": "luohao-antd-vue",
   "version": "0.1.2",
+  "main": "dist/luohao-antd-vue.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
