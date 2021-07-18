@@ -1,12 +1,20 @@
 const moment = require("moment");
 const buildTimestamp = moment().toString();
 const configureWebpack = require("./configs/webpack.config");
-
+const container = require('markdown-it-container');
+const tasklists = require('markdown-it-task-lists');
 module.exports = {
   title: "组件库",
   description: "组件库",
   port: 9000,
   base: "/",
+  markdown: {
+    lineNumbers: true,
+    extendMarkdown: md => {
+      md.use(container);
+      md.use(tasklists);
+    }
+  },
   themeConfig: {
     logo: "/logo.png",
     navbar: true,
@@ -71,4 +79,7 @@ module.exports = {
     lastUpdated: "最后更新时间",
   },
   configureWebpack,
+  less: {
+    javascriptEnabled: true,
+  },
 };

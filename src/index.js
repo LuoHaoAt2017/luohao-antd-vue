@@ -1,7 +1,7 @@
-import HelloWorld from './components/hello-world.vue';
+import LHSelect from './components/select';
 
 const items = [
-  HelloWorld
+  LHSelect
 ];
 
 const install = function(Vue) {
@@ -17,5 +17,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  HelloWorld
+  LHSelect
 }
