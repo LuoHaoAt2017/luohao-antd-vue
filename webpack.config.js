@@ -1,6 +1,8 @@
 const path = require("path");
+const Webpackbar = require('webpackbar');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { VueLoaderPlugin } = require("vue-loader");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function resolve(params) {
   return path.resolve(__dirname, params);
@@ -8,7 +10,7 @@ function resolve(params) {
 
 module.exports = {
   mode: 'production',
-  entry: resolve("src/main.js"),
+  entry: resolve("src/index.js"),
   output: {
     filename: "index.js",
     path: resolve("dist"),
@@ -20,14 +22,17 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: "vue-loader",
+        include: [resolve('src')],
       },
       {
         test: /\.js$/,
         loader: "babel-loader",
+        include: [resolve('src')],
       },
       {
         test: /\.(less|css)$/,
-        use: ["css-loader", "less-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+        include: [resolve('src')],
       },
       {
         test: /\.(png|jpg|svg)$/,
@@ -36,6 +41,7 @@ module.exports = {
           name: "[name].[ext]",
           outputPath: "img/",
         },
+        include: [resolve('src')],
       },
     ],
   },
@@ -43,7 +49,11 @@ module.exports = {
     extensions: [".js", ".vue"],
   },
   plugins: [
+    new Webpackbar(),
     new VueLoaderPlugin(),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'index.css'
+    })
   ],
 };
