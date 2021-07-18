@@ -46,6 +46,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      "@": resolve("src"),
+    },
     extensions: [".js", ".vue"],
   },
   plugins: [
