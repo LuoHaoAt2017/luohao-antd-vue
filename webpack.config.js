@@ -16,15 +16,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: "babel-loader",
-        options: {
-          presets: [
-            ['@babel/preset-env', { targets: "defaults" }]
-          ]
-        }
       },
       {
         test: /\.(less|css)$/,
-        use: ["css-loader", "less-loader"],
+        use: ["vue-style-loader", "css-loader", "less-loader"],
       },
       {
         test: /\.(png|jpg|svg)$/,

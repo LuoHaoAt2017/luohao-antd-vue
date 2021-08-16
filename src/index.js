@@ -1,15 +1,12 @@
-import Select from './components/select';
-import Button from './components/button';
-import Tooltip from './components/tooltip';
-import Popover from './components/popover';
+import LHSelect from './components/select/index';
 
 const items = [
-  Select, Button, Tooltip, Popover
+  LHSelect, 
 ];
 
 const install = function (Vue) {
-  items.forEach(elem => {
-    Vue.component(elem.name, elem);
+  items.forEach(item => {
+    item.install(Vue);
   });
 }
 
@@ -20,8 +17,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  Button,
-  Select,
-  Tooltip,
-  Popover
+  LHSelect,
 }
