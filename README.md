@@ -1,34 +1,9 @@
-# demo
+用户操作的路径
 
-## Project setup
-```
-yarn install
-```
+测试用例
+- 稳定性
+- 全面性
+- 健壮性
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+puppeteer操作Dom可以完全在内存中进行模拟
+即在V8引擎中处理而不打开浏览器

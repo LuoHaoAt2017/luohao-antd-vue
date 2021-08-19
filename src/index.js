@@ -1,7 +1,8 @@
 import LHSelect from './components/select/index';
-
+import LHPagination from './components/pagination/index';
 const items = [
-  LHSelect, 
+  LHSelect,
+  LHPagination,
 ];
 
 const install = function (Vue) {
@@ -18,4 +19,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   LHSelect,
+  LHPagination
 }

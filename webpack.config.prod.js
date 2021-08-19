@@ -7,6 +7,7 @@ function resolve(params) {
 }
 
 module.exports = merge(config, {
+  devtool: 'source-map',
   mode: 'production',
   entry: resolve("src/index.js"),
   output: {
