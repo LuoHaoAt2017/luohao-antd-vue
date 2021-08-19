@@ -10,6 +10,7 @@ function resolve(params) {
 }
 
 module.exports = merge(config, {
+  devtool: 'eval-source-map',
   mode: 'development',
   entry: resolve("examples/index.js"),
   output: {

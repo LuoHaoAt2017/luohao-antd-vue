@@ -18,7 +18,7 @@ import { getSlotChildren } from '@/utils/vnode';
 
 // 在普通组件中，没有被定义为 prop 的 attribute 会自动添加到组件的根元素上 context.data
 // 在普通组件中，被定义为 prop 的 attribute 会自动添加到组件的props上
-
+// todo 自定义前缀
 const LHSelect = {
   name: 'lh-select',
   functional: true,
@@ -30,12 +30,11 @@ const LHSelect = {
     const { props, slots, data } = context;
     const slotsContents = slots();
     const slotChildren = getSlotChildren(h, slotsContents, ['clearIcon', 'suffixIcon']);
-    // const children = slotsContents.default.concat(slotChildren);
     const children = [slotsContents.default, ...slotChildren];
-    // console.log('children: ', children);
+    data.staticClass = data.staticClass + ' lh-select';
     return h(Select, {
       props: props,
-      ...data
+      ...data,
     }, children);
   }
 }
