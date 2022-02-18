@@ -15,5 +15,5 @@ module.exports = merge(config, {
     path: resolve("libs"),
     library: "luohao-antd-vue",
     libraryTarget: "umd",
-  },
+  }
 });

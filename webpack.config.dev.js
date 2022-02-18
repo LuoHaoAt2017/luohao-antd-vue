@@ -38,5 +38,15 @@ module.exports = merge(config, {
     }),
     new webpack.ProvidePlugin({
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
 });
